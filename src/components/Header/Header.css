@@ -1,6 +1,6 @@
 .stat-item {
   margin-top: 2rem;
-  font-family: Lato, Helvetica Neue, Arial, Helvetica, sans-serif;
+  /* font-family: Helvetica,Arial,sans-serif; */
   font-size: 1em;
   font-weight: 700;
   color: azure;
@@ -10,6 +10,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  clear: both;
+    overflow: hidden;
+    /* visibility: hidden; */
 }
 
 
@@ -17,10 +20,15 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
+    flex-wrap: wrap;
   height: 14rem;
   gap: 5rem;
   background: linear-gradient(to right, rgb(63, 81, 181), rgb(100, 181, 246))
     rgb(255, 255, 255);
+}
+
+.stat2{
+  font-size: 1.5rem;
 }
 
 

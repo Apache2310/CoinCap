@@ -15,12 +15,22 @@ export const SingleCryptoInfo = ({ cryptoCoin }) => {
     } = cryptoCoin
 
     // Rounding Off values
-    const price = Number(priceUsd).toFixed(2)
-    const marketCap = Math.abs(Number(marketCapUsd)) >= 1.0e+9 ? (Math.abs(Number(marketCapUsd)) / 1.0e+9).toFixed(2) + "b" : 0
-    const volume = Math.abs(Number(volumeUsd24Hr)) >= 1.0e+9 ? (Math.abs(Number(volumeUsd24Hr)) / 1.0e+9).toFixed(2) + "b" : 0
-    const Supply = Math.abs(Number(supply)) >= 1.0e+6 ? (Math.abs(Number(supply)) / 1.0e+6).toFixed(2) + "m" : 0
-    const changePer24Hr = Number(changePercent24Hr).toFixed(2)
-    const vwap24 = Number(vwap24Hr).toFixed(2)
+    // const price = Number(priceUsd).toFixed(2)
+    // const marketCap = Math.abs(Number(marketCapUsd)) >= 1.0e+9 ? (Math.abs(Number(marketCapUsd)) / 1.0e+9).toFixed(2) + "b" : 0
+    // const volume = Math.abs(Number(volumeUsd24Hr)) >= 1.0e+9 ? (Math.abs(Number(volumeUsd24Hr)) / 1.0e+9).toFixed(2) + "b" : 0
+    // const Supply = Math.abs(Number(supply)) >= 1.0e+6 ? (Math.abs(Number(supply)) / 1.0e+6).toFixed(2) + "m" : 0
+    // const changePer24Hr = Number(changePercent24Hr).toFixed(2)
+    // const vwap24 = Number(vwap24Hr).toFixed(2)
+
+    function formatNumber(num){
+        if(num > 999999999){
+            return (num / 1000000000).toFixed(2) + "b";
+    }else if(num >999999){
+        return (num/1000000).toFixed(2)+ "m";
+    }else{
+        return num.toFixed(2);
+    }
+}
 
 
     return (
@@ -34,22 +44,22 @@ export const SingleCryptoInfo = ({ cryptoCoin }) => {
                 </div>
             </td>
             <td className='crypto__info py-3'>
-                {`$${price}`}
+                ${parseFloat(priceUsd).toFixed(2)}
             </td>
             <td className='crypto__info py-3'>
-                {`$${marketCap}`}
+                ${formatNumber(parseFloat(marketCapUsd))}
             </td>
             <td className='crypto__info py-3'>
-                {`$${vwap24}`}
+                ${formatNumber(parseFloat(vwap24Hr))}
             </td>
             <td className='crypto__info py-3'>
-                {Supply}
+                {formatNumber(parseFloat(supply))}
             </td>
             <td className='crypto__info py-3'>
-                {`$${volume}`}
+                ${formatNumber(parseFloat(volumeUsd24Hr))}
             </td>
-            <td className={changePer24Hr < 0 ? `crypto__info py-3` : `crypto__info py-3`}>
-                {`${changePer24Hr} % `}
+            <td className={changePercent24Hr < 0 ? `crypto__info py-3` : `crypto__info py-3`}>
+                {formatNumber(parseFloat(changePercent24Hr))}%
             </td>
         </tr>
     )

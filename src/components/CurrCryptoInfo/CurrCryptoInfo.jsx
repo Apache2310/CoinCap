@@ -5,15 +5,15 @@ import './CurrCryptoInfo.css';
 
 export const CurrCryptoInfo = () => {
     const [cryptoCoins, setCryptoCoins] = useState([]);
+    const [limit, setLimit] = useState(20);
     const [isLoading, setIsLoading] = useState(false);
-    const [page, setPage] = useState(1);
     const [error, setError] = useState('');
 
     useEffect(() => {
         const fetchCryptoCoins = async () => {
             try {
                 setIsLoading(true);
-                const response = await axios.get(`https://api.coincap.io/v2/assets/?limit=${page * 20}`);
+                const response = await axios.get(`https://api.coincap.io/v2/assets/?limit=${limit}`);
                 setCryptoCoins(response.data.data);
             } catch (error) {
                 console.log(error.message);
@@ -24,7 +24,7 @@ export const CurrCryptoInfo = () => {
         };
 
         fetchCryptoCoins();
-    }, [page]);
+    }, [limit]);
 
     return (
         <>
@@ -50,7 +50,7 @@ export const CurrCryptoInfo = () => {
                 </table>
             </section>
             <div className='more'>
-                <button onClick={() => setPage((prevPage) => prevPage + 1)} className='btn'>
+                <button onClick={() => setLimit((prevPage) => prevPage + 20)} className='btn'>
                     {isLoading ? 'Loading...' : 'View More'}
                 </button>
             </div>
